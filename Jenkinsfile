@@ -31,8 +31,29 @@ pipeline {
         stage('Health Check') {
             steps {
                 sh '''
-                    sleep 5
-                    curl -fsS http://localhost:3000/health
+                    for i in $(seq 1 12); do
+                        STATUS=$(docker inspect \
+                          --format='{{.State.Health.Status}}' \
+                          devops-web-app 2>/dev/null || true)
+
+                        echo "Health status: $STATUS"
+
+                        if [ "$STATUS" = "healthy" ]; then
+                            echo "Application is healthy!"
+                            exit 0
+                        fi
+
+                        if [ "$STATUS" = "unhealthy" ]; then
+                            docker logs --tail 30 devops-web-app
+                            exit 1
+                        fi
+
+                        sleep 5
+                    done
+
+                    echo "Health check timed out!"
+                    docker logs --tail 30 devops-web-app
+                    exit 1
                 '''
             }
         }
