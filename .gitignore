@@ -1,0 +1,15 @@
+# Jenkins data
+jenkins/
+jenkins_home/
+
+# Dependencies
+node_modules/
+
+# Sensitive files
+.env
+.env.*
+*.log
+
+# Temporary files
+*.tmp
+*.swp
