@@ -1,8 +1,7 @@
-
 const http = require("http");
 
 const PORT = process.env.PORT || 3000;
-const VERSION = "2.1.0";
+const VERSION = "3.0.0";
 
 const html = `
 <!DOCTYPE html>
@@ -10,57 +9,70 @@ const html = `
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DevOpsFlow | Version 2.1</title>
+<title>DevOpsFlow | Final Release 3.0</title>
 <style>
 * { box-sizing: border-box; }
 body {
-  margin: 0;
-  min-height: 100vh;
+  margin: 0; min-height: 100vh;
   font-family: 'Segoe UI', Arial, sans-serif;
-  color: white;
   background:
-    radial-gradient(circle at 15% 20%, #1d4ed8 0%, transparent 35%),
-    radial-gradient(circle at 85% 85%, #075985 0%, transparent 35%),
-    #080f23;
+    radial-gradient(circle at 15% 15%, #6d28d9 0%, transparent 38%),
+    radial-gradient(circle at 85% 80%, #9d174d 0%, transparent 40%),
+    #110b24;
+  color: white;
 }
-.container { max-width: 1100px; margin: auto; padding: 30px; }
+.container { max-width: 1150px; margin: auto; padding: 30px; }
 nav { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-size: 25px; font-weight: 800; }
-.logo span { color: #38bdf8; }
+.logo { font-size: 26px; font-weight: 800; }
+.logo span { color: #f0abfc; }
 .online {
   padding: 10px 16px; border-radius: 30px;
   background: #064e3b; color: #86efac; font-size: 13px;
 }
-.hero { text-align: center; padding: 105px 0 65px; }
+.hero { text-align: center; padding: 95px 0 60px; }
 .tag {
-  color: #7dd3fc; border: 1px solid #38bdf8;
-  padding: 10px 20px; border-radius: 30px;
-  font-size: 13px; letter-spacing: 2px;
+  display: inline-block; padding: 11px 23px;
+  border: 1px solid #e879f9; border-radius: 30px;
+  color: #f0abfc; letter-spacing: 2px; font-size: 13px;
 }
 h1 {
-  font-size: clamp(42px, 7vw, 76px);
-  line-height: 1.12; margin: 35px 0 20px;
+  font-size: clamp(42px, 7vw, 78px);
+  line-height: 1.13; margin: 32px 0 20px;
 }
-h1 span { color: #38bdf8; }
-.subtitle { color: #bac8e5; font-size: 18px; line-height: 1.8; }
-.version {
+.gradient {
+  background: linear-gradient(90deg,#c084fc,#f9a8d4,#f0abfc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.subtitle { color: #d5c8e8; font-size: 18px; line-height: 1.8; }
+.success {
   display: inline-block; margin-top: 28px;
-  background: #172b50; border: 1px solid #33578c;
-  padding: 15px 30px; border-radius: 14px;
-  color: #7dd3fc; font-weight: bold;
+  padding: 17px 32px; border-radius: 15px;
+  background: linear-gradient(90deg,#7c3aed,#db2777);
+  box-shadow: 0 12px 35px #a21caf55;
+  font-weight: bold;
 }
 .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
 .card {
-  padding: 30px; background: #ffffff0d;
-  border: 1px solid #ffffff26; border-radius: 20px;
+  background: #ffffff0e; border: 1px solid #ffffff30;
+  border-radius: 22px; padding: 30px;
 }
-.card .icon { font-size: 35px; }
-.card h3 { font-size: 21px; }
-.card p { color: #bac8e5; line-height: 1.7; }
+.card .icon { font-size: 36px; }
+.card h3 { font-size: 21px; margin-bottom: 10px; }
+.card p { color: #d5c8e8; line-height: 1.7; }
+.banner {
+  margin-top: 30px; padding: 25px;
+  border: 1px solid #c084fc66;
+  border-radius: 20px; text-align: center;
+  background: #a855f71a;
+}
+.banner h2 { color: #f0abfc; margin: 0 0 10px; }
+.banner p { color: #e9d5ff; margin-bottom: 0; }
 footer {
-  text-align: center; margin-top: 70px;
+  text-align: center; margin-top: 55px;
   padding: 25px; border-top: 1px solid #ffffff22;
-  color: #94a3b8;
+  color: #c4b5d6;
 }
 @media(max-width:700px) {
   .cards { grid-template-columns: 1fr; }
@@ -76,34 +88,39 @@ footer {
   </nav>
 
   <section class="hero">
-    <span class="tag">TEST DEPLOYMENT</span>
-    <h1>From Code to <span>Cloud.</span><br>One Seamless Flow.</h1>
+    <span class="tag">FINAL PROJECT DEMONSTRATION</span>
+    <h1>Build. Deploy.<br><span class="gradient">Automate Everything.</span></h1>
     <p class="subtitle">
-      Automated CI/CD Deployment on Ubuntu<br>
-      Powered by GitHub, Jenkins, Docker and Nginx
+      Modern DevOps CI/CD Infrastructure<br>
+      Developed on Windows — Deployed on Ubuntu
     </p>
-    <div class="version">✓ TEST RELEASE — VERSION 2.1.0</div>
+    <div class="success">✓ DEPLOYMENT SUCCESSFUL — VERSION 3.0.0</div>
   </section>
 
   <section class="cards">
     <div class="card">
       <div class="icon">⌘</div>
-      <h3>GitHub + Jenkins</h3>
-      <p>Source control and automated CI/CD deployment.</p>
+      <h3>Continuous Integration</h3>
+      <p>GitHub and Jenkins automate the source checkout and build process.</p>
     </div>
     <div class="card">
       <div class="icon">⬡</div>
-      <h3>Docker + Nginx</h3>
-      <p>Containerized web application and reverse proxy.</p>
+      <h3>Continuous Deployment</h3>
+      <p>Docker and Nginx deliver the latest web application release.</p>
     </div>
     <div class="card">
       <div class="icon">◉</div>
-      <h3>Monitoring</h3>
-      <p>Prometheus and Grafana for infrastructure monitoring.</p>
+      <h3>Infrastructure Monitoring</h3>
+      <p>Prometheus and Grafana provide real-time monitoring dashboards.</p>
     </div>
   </section>
 
-  <footer>VKU | DevOps CI/CD Project | Test Version 2.1.0</footer>
+  <section class="banner">
+    <h2>🚀 CI/CD PIPELINE COMPLETED</h2>
+    <p>Source Code → GitHub → Jenkins → Docker → Ubuntu Server</p>
+  </section>
+
+  <footer>VKU | DevOps CI/CD Final Project | Release 3.0.0</footer>
 </div>
 </body>
 </html>
